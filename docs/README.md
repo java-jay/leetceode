@@ -164,7 +164,7 @@
         }
     }
     
-    public WordDictionary3() {
+    public WordDictionary() {
         trie = new Trie();
     }
     

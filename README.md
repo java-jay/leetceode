@@ -4,7 +4,7 @@
 >
 > 博主是一名学习java的跨专业者，在学习过程中不免有一些错误，劳烦各位指出错误。
 
-
+在线阅读：https://java-jay.github.io/leetceode/#/
 
 ## 211. 添加与搜索单词 - 数据结构设计
 
@@ -163,7 +163,7 @@
         }
     }
     
-    public WordDictionary3() {
+    public WordDictionary() {
         trie = new Trie();
     }
     
