@@ -1,4 +1,4 @@
-package array;
+package algorithm.doublePointer;
 
 import java.util.Arrays;
 
