@@ -1,4 +1,4 @@
-package binarySearch;
+package algorithm.binarySearch;
 
 /**
  * 162. 寻找峰值

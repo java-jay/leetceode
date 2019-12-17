@@ -1,4 +1,4 @@
-package binarySearch;
+package algorithm.binarySearch;
 
 /**
  * 4. 寻找两个有序数组的中位数

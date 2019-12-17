@@ -1,4 +1,4 @@
-package binarySearch;
+package algorithm.binarySearch;
 
 public class Mysort {
     public static void main(String[] args) {
