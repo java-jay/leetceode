@@ -3,6 +3,7 @@ package algorithm.binarySearch;
 public class Mysort {
     public static void main(String[] args) {
         new Mysort().mySqrt(4);
+        System.out.println("5"+3);
     }
 
     public int mySqrt(int x) {
