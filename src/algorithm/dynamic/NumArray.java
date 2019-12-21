@@ -1,5 +1,8 @@
 package algorithm.dynamic;
 
+/**
+ * 303.区域和检索 - 数组不可变
+ */
 public class NumArray {
     private int[] sum;
     //构建数组和
