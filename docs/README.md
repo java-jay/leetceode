@@ -8,7 +8,7 @@
 
 ## 211. 添加与搜索单词 - 数据结构设计
 
-### 哈希表解法（trie.WordDictionary）
+### 哈希表解法（structure.trie.WordDictionary）
 
 #### 思路
 
@@ -64,7 +64,7 @@
         return false;
     }
 
-### 前缀树+dfs解法(trie.WordDictionary3)
+### 前缀树+dfs解法(structure.trie.WordDictionary3)
 
 #### 思路
 
@@ -84,7 +84,7 @@
 
 #### 代码
 
-    private Trie trie;
+    private Trie structure.trie;
     
     private class Trie {  
         TrieNode root;
@@ -165,26 +165,26 @@
     }
     
     public WordDictionary() {
-        trie = new Trie();
+        structure.trie = new Trie();
     }
     
     public void addWord(String word) {
-        trie.insert(word);
+        structure.trie.insert(word);
     }
     
     public boolean search(String word) {
-        return trie.search(word);
+        return structure.trie.search(word);
     }
     public WordDictionary() {
-    	trie = new Trie();
+    	structure.trie = new Trie();
     }
     
     public void addWord(String word) {
-    	trie.insert(word);
+    	structure.trie.insert(word);
     }
     
     public boolean search(String word) {
-    	return trie.search(word);
+    	return structure.trie.search(word);
     }
 
 ## 说明

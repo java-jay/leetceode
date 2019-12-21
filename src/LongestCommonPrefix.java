@@ -1,4 +1,4 @@
-import trie.Trie;
+import structure.trie.Trie;
 
 /**
  * 14. 最长公共前缀

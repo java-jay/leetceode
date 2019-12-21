@@ -1,7 +1,7 @@
 package algorithm.recursion;
 
 
-import tree.TreeNode;
+import structure.tree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
