@@ -1,4 +1,4 @@
-package structure.string;
+package algorithm.math;
 
 /**
  * 67. 二进制求和
