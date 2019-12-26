@@ -1,4 +1,4 @@
-package algorithm.math;
+package algorithm.doublePointer;
 
 /**
  * 67. 二进制求和
