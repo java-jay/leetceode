@@ -1,8 +1,11 @@
 package algorithm.binarySearch;
 
-public class Mysort {
+/**
+ * 69. x 的平方根
+ */
+public class Mysqrt {
     public static void main(String[] args) {
-        new Mysort().mySqrt(4);
+        new Mysqrt().mySqrt(4);
         System.out.println("5"+3);
     }
 
