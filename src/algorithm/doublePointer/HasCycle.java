@@ -3,17 +3,8 @@ package algorithm.doublePointer;
 /**
  * 141. 环形链表
  */
-class ListNode {
-    int val;
-    ListNode next;
 
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
-
-public class HasCycle {
+class HasCycle {
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) {
             return false;
