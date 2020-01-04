@@ -6,6 +6,11 @@ package structure.tree;
  */
 public class IsSubtree {
     public boolean isSubtree(TreeNode s, TreeNode t) {
+        /*
+         t就等于s本身
+         t是s的左子树的子树
+         t是s的右子树的子树
+         */
         if (s == null && t == null) {
             return true;
         }
@@ -18,7 +23,13 @@ public class IsSubtree {
         // 当前节点不同，就直接跳到下一节点进行判断
         return isSubtree(s.left, t) || isSubtree(s.right, t);
     }
-    //判断s的子树是否和t相等
+
+    /**
+        判断s的子树是否和t相等
+        根节点值相等
+        l的左子树和r的左子树相等
+        l的右子树和r的右子树相等
+     */
     private boolean isEqual(TreeNode l, TreeNode r) {
         if (l == null && r == null) {
             return true;//两树均空自然相等
