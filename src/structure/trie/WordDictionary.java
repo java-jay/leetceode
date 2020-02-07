@@ -14,13 +14,17 @@ import java.util.Set;
  * search("bad") -> true
  * search(".ad") -> true
  * search("b..") -> true
- *
+ * <p>
  * 哈希表实现
  * 执行用时 : 51 ms, 击败了98.29% 的用户 内存消耗 : 54.5 MB, 击败了95.16% 的用户
  */
 public class WordDictionary {
 
-    Map<Integer, Set<String>> map = new HashMap<>();//key:字符串长度,value:字符串集合（set：确保唯一）
+    Map<Integer, Set<String>> map;
+
+    public WordDictionary() {
+        map = new HashMap<>();
+    }
 
     //添加单词
     public void addWord(String word) {
@@ -38,19 +42,27 @@ public class WordDictionary {
 
     //查找单词
     public boolean search(String word) {
-        Set<String> set = map.get(word.length());//找到该单词长度的set集合
-        if (set == null) {  //不存在该长度的字符串，直接返回false；
+        //找到该单词长度的set集合
+        Set<String> set = map.get(word.length());
+        //不存在该长度的字符串，直接返回false；
+        if (set == null) {
             return false;
         }
-        if (set.contains(word)) return true;//如果set存在该单词，直接返回true
+        //如果set存在该单词，直接返回true
+        if (set.contains(word)) {
+            return true;
+        }
         //如果不存在，则判断正则表达式
-        char[] chars = word.toCharArray();//转换为字符数组
-        P://带标签的continue，可以指示continue跳出的是哪一个循环
-        for (String s : set) {//遍历set集合
-            char[] cs = s.toCharArray();//把遍历到的单词转字符数组
-            for (int i = 0; i < cs.length; i++) {//逐个字符对比
-                if (chars[i] != '.' && chars[i] != cs[i]) {//如果单词中不包含.且两个单词当前字符不匹配
-                    continue P;//跳出到set的下一单词
+        //带标签的continue，可以指示continue跳出的是哪一个循环
+        P:
+        //遍历set集合
+        for (String s : set) {
+            //逐个字符对比
+            for (int i = 0; i < s.length(); i++) {
+                //如果单词中不包含.且两个单词当前字符不匹配
+                if (word.charAt(i) != s.charAt(i) && word.charAt(i) != '.') {
+                    //跳出到set的下一单词
+                    continue P;
                 }
             }
             //循环结束，说明set的当前单词就是要找的单词

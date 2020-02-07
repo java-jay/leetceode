@@ -67,24 +67,24 @@ public class RomanToInt {
      * @return
      */
     public static int romanToInt2(String s) {
-        int sum = 0;
+        int ans = 0;
         //获取前值
         int preNum = getValue(s.charAt(0));
-        for(int i = 1;i < s.length(); i ++) {
+        for(int i = 1;i < s.length(); i++) {
             //获取后值
             int num = getValue(s.charAt(i));
             //如果前值更小，说明是后面的值-前面的值，如IV为5-1，所以总值先减前值
             if(preNum < num) {
-                sum -= preNum;
+                ans -= preNum;
             } else {//如果前值更大，说明是后面的值+前面的值，所以总值先加前值
-                sum += preNum;
+                ans += preNum;
             }
             //当前值成为前值
             preNum = num;
         }
         //最后一个值必定为加，总值加上最后的前值
-        sum += preNum;
-        return sum;
+        ans += preNum;
+        return ans;
     }
 
     private static int getValue(char ch) {
