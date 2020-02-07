@@ -7,6 +7,7 @@ public class ValidPalindrome {
     public static void main(String[] args) {
         new ValidPalindrome().validPalindrome("abca");
     }
+
     public boolean validPalindrome(String s) {
         char[] chars = s.toCharArray();
         int i = 0;
@@ -33,4 +34,5 @@ public class ValidPalindrome {
         }
         return true;
     }
+
 }

@@ -15,7 +15,9 @@ public class AddStrings {
             sb.append(sum % 10);
             ca = sum / 10;
         }
-        if (ca == 1) sb.append(1);
+        if (ca == 1) {
+            sb.append(1);
+        }
         return sb.reverse().toString();
     }
 }

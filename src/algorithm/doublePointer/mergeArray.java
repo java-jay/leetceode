@@ -17,4 +17,6 @@ public class mergeArray {
         //将num2的从索引0开始，长度len2+1的值，拷到num1中，从num1索引开始
         System.arraycopy(nums2, 0, nums1, 0, len2 + 1);
     }
+
+
 }
