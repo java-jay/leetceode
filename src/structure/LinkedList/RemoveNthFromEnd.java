@@ -8,19 +8,23 @@ package structure.LinkedList;
  */
 public class RemoveNthFromEnd {
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        //头节点
         ListNode pre = new ListNode(0);
         pre.next = head;
-        ListNode start = pre, end = pre;
-        //判断end要走几次，总节点数-n，就是end最后在的节点
+        //快慢指针是从头节点开始的
+        ListNode fast = pre, slow = pre;
+        //快指针移到正数第n个节点
         while (n != 0) {
-            start = start.next;
+            fast = fast.next;
             n--;
         }
-        while (start.next != null) {
-            start = start.next;
-            end = end.next;
+        //同时移动快指针和慢指针，直到快指针到达最后一个节点，也就是快指针又移动了l-n个节点（l为总长度）
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
         }
-        end.next = end.next.next;
+        //这时慢指针在第l-n个节点，也就是倒数第n+1个节点
+        slow.next = slow.next.next;
         //有可能head也会被删除，所以要返回pre的下一个节点
         return pre.next;
     }

@@ -1,4 +1,7 @@
-package structure.LinkedList;
+package algorithm.recursion;
+
+
+import algorithm.doublePointer.ListNode;
 
 /**
  * 21. 合并两个有序链表
@@ -10,8 +13,13 @@ package structure.LinkedList;
  */
 public class MergeTwoLists {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null) return l2;//l1都等于null了，肯定是l2更大呀
-        if (l2 == null) return l1;
+        if (l1 == null) {
+            //l1都等于null了，肯定是l2更大呀
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
         if (l1.val < l2.val) {
             l1.next = mergeTwoLists(l1.next, l2);
             return l1;

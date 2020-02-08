@@ -1,4 +1,4 @@
-package structure.LinkedList;
+package algorithm.doublePointer;
 
 /**
  * 234.回文链表
