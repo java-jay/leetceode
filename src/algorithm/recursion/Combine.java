@@ -10,7 +10,7 @@ import java.util.List;
 public class Combine {
     public static void main(String[] args) {
         Combine combine = new Combine();
-        combine.combine(4, 3);
+        combine.combine(4, 2);
     }
 
     private List<List<Integer>> ans = new ArrayList<>();
@@ -26,11 +26,13 @@ public class Combine {
             ans.add(new ArrayList<>(list));
             return;
         }
-        //从1节点开始，对每一个可能进行遍历
+        //n-k+1的含义是：当前这层方法所代表的数能增长到的最大值
+        //例如n=4，k=2，顺序为1,2 1,3 1,4 2,3 2,4 3,4
         for (int i = start; i <= n - k + 1; i++) {
             list.add(i);
+            //集合还能容纳的数字-1，后续数字前进1
             getCombine(n, k - 1, i + 1, list);
-            //去除最后一个节点，准备下一次循环
+            //集合已被添加，去除最后一个节点，准备下一次循环，例如1,2将2删除，才能再添加3，变为1,3
             list.remove(list.size() - 1);
         }
     }
