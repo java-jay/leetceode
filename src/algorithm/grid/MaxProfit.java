@@ -6,14 +6,17 @@ package algorithm.grid;
  */
 public class MaxProfit {
     public int maxProfit(int[] prices) {
-        int n = prices.length;
-        if (n == 0) return 0;
-        int min = prices[0];
-        int max = 0;
-        for (int i = 1; i < n; i++) {
-            if (prices[i] > min) max = Math.max(max, prices[i] - min);
-            else min = prices[i];
+        if (prices.length == 0) {
+            return 0;
         }
-        return max;
+        int min = prices[0], profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > min) {
+                profit = Math.max(prices[i] - min, profit);
+            } else {
+                min = prices[i];
+            }
+        }
+        return profit;
     }
 }

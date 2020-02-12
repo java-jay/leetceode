@@ -25,9 +25,9 @@ public class IsValid {
             //如果当前字符是右括号
             if (map.containsKey(c)) {
                 //如果栈中已无元素，就赋值一个#，如果有元素，就弹出栈首元素
-                char topElement = stack.empty() ? '#' : stack.pop();
+                char top = stack.isEmpty() ? '#' : stack.pop();
                 //如果栈首元素不是左括号
-                if (topElement != map.get(c)) {
+                if (top != map.get(c)) {
                     return false;
                 }
             } else {

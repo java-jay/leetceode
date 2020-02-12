@@ -10,13 +10,16 @@ public class FindContentChildren {
         //从胃口最小的开始找，先进行排序
         Arrays.sort(g);
         Arrays.sort(s);
-        int gIndex=0, sIndex=0, count=0;
-        while (gIndex < g.length && sIndex < s.length) {
-            if (s[sIndex] >= g[gIndex]) {//如果最小的尺寸满足最小的胃口
+        int i = 0, j = 0, count = 0;
+        while (i < g.length && j < s.length) {
+            //如果最小的尺寸满足最小的胃口
+            if (s[j] >= g[i]) {
                 count++;
-                gIndex++;//胃口指针右移
+                //胃口指针右移
+                i++;
             }
-            sIndex++;//尺寸指针右移
+            //尺寸指针右移
+            j++;
         }
         return count;
     }
