@@ -4,22 +4,24 @@ package algorithm.binarySearch;
  * 367. 有效的完全平方数
  */
 public class IsPerfectSquare {
+    public static void main(String[] args) {
+        new IsPerfectSquare().isPerfectSquare(808201);
+    }
+
     public boolean isPerfectSquare(int num) {
         if (num < 2) {
             return true;
         }
-
-        long left = 2, right = num / 2, x, guessSquared;
+        long left = 2, right = num / 2;
         while (left <= right) {
-            x = left + (right - left) / 2;
-            guessSquared = x * x;
-            if (guessSquared == num) {
+            long mid = (left + right) >>> 1;
+            long square = mid * mid;
+            if (square == num) {
                 return true;
-            }
-            if (guessSquared > num) {
-                right = x - 1;
+            } else if (square < num) {
+                left = mid + 1;
             } else {
-                left = x + 1;
+                right = mid - 1;
             }
         }
         return false;

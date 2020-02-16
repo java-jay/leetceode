@@ -6,21 +6,22 @@ package algorithm.binarySearch;
 public class NextGreatestLetter {
     public static void main(String[] args) {
         char[] chars = {'a', 'b'};
-        new NextGreatestLetter().nextGreatestLetter(chars,'z');
+        new NextGreatestLetter().nextGreatestLetter(chars, 'z');
     }
+
     public char nextGreatestLetter(char[] letters, char target) {
-        int low = 0, high = letters.length;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (letters[mid] <= target) {
-                low = mid + 1;
+        int left = 0, right = letters.length;
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            char c = letters[mid];
+            if (c <= target) {
+                left = mid + 1;
             } else {
-                high = mid;
+                right = mid;
             }
         }
         //因为数组里字母的顺序是循环的，所以取余数
-        return letters[low % letters.length];
-
-
+        return letters[right % letters.length];
     }
 }
+
