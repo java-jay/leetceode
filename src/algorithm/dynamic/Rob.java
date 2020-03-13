@@ -1,4 +1,4 @@
-package structure.array;
+package algorithm.dynamic;
 
 /**
  * 198. 打家劫舍
@@ -10,7 +10,9 @@ package structure.array;
 public class Rob {
     public int rob(int[] nums) {
         int len = nums.length;
-        if (len == 0) return 0;
+        if (len == 0) {
+            return 0;
+        }
         //因为要i-2，所以要长度再加1
         int[] dp = new int[len + 1];
         dp[0] = 0;

@@ -1,6 +1,7 @@
-package structure.array;
+package algorithm.slidingWindow;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 219. 存在重复元素 II
@@ -32,11 +33,18 @@ public class ContainsNearbyDuplicate {
      * @return
      */
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        HashSet<Integer> set = new HashSet<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (set.contains(nums[i])) return true;
-            set.add(nums[i]);
-            if (set.size() > k) set.remove(nums[i - k]);
+        int i = 0, j = 0, n = nums.length;
+        Set<Integer> set = new HashSet<>();
+        while (i < n && j < n) {
+            if (!set.contains(nums[j])) {
+                set.add(nums[j++]);
+            } else {
+                if (j - i <= k) {
+                    return true;
+                } else {
+                    set.remove(nums[i++]);
+                }
+            }
         }
         return false;
     }

@@ -1,4 +1,4 @@
-package structure.array;
+package algorithm.doublePointer;
 
 /**
  * 26. 删除排序数组中的重复项
@@ -6,7 +6,7 @@ package structure.array;
 public class RemoveDuplicates {
     public static void main(String[] args) {
         RemoveDuplicates removeDuplicates = new RemoveDuplicates();
-        removeDuplicates.removeDuplicates(new int[]{1, 1, 1, 2});
+        removeDuplicates.removeDuplicates(new int[]{1,2});
     }
 
     /**
@@ -16,14 +16,16 @@ public class RemoveDuplicates {
      * @return
      */
     public int removeDuplicates(int[] nums) {
-        if (nums.length == 0) return 0;
         int i = 0;
         for (int j = 1; j < nums.length; j++) {
-            if (nums[j] != nums[i]) {//不等于的时候，说明没有重复值，数组长度才可以+1
+            //不等于的时候，说明没有重复值，数组长度才可以+1
+            if (nums[j] != nums[i]) {
                 i++;
-                nums[i] = nums[j];//为了覆盖重复值,把右边的非重复值挪到左边来替代重复值
+                //输出的时候是从左到右输出数组的，让后面的值覆盖前面的重复值
+                nums[i] = nums[j];
             }
         }
-        return i + 1;//因为是返回数组长度，所以最后要+1
+        //因为是返回数组长度，所以最后要+1
+        return i + 1;
     }
 }

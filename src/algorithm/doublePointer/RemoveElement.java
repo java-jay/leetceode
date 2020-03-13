@@ -1,4 +1,4 @@
-package structure.array;
+package algorithm.doublePointer;
 
 /**
  * 27. 移除元素
@@ -6,9 +6,10 @@ package structure.array;
  */
 public class RemoveElement {
     public static void main(String[] args) {
-        RemoveElement removeElement=new RemoveElement();
-        removeElement.removeElement2(new int[]{4,1,2,3,5},4);
+        RemoveElement removeElement = new RemoveElement();
+        removeElement.removeElement2(new int[]{4, 1, 2, 3, 5}, 4);
     }
+
     /**
      * 双指针法，j判断是否与val一样，如果不一样，i右移一位，相当于把右边的值往左挪，最后返回i就好了
      *
@@ -20,6 +21,7 @@ public class RemoveElement {
         int i = 0;
         for (int j = 0; j < nums.length; j++) {
             if (nums[j] != val) {
+                nums[i] = nums[j];
                 i++;
             }
         }
@@ -28,6 +30,7 @@ public class RemoveElement {
 
     /**
      * 双指针 —— 当要删除的元素很少时
+     *
      * @param nums
      * @param val
      * @return

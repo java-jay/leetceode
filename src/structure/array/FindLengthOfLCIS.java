@@ -5,13 +5,17 @@ package structure.array;
  */
 public class FindLengthOfLCIS {
     public int findLengthOfLCIS(int[] nums) {
-        if (nums.length <= 1) return nums.length;
-        int ans = 1;//最大长度
-        int count = 1;//当前的最大长度
-        for (int i = 0; i < nums.length-1; i++) {
-            if (nums[i + 1] > nums[i]) count++;
-            else count = 1;//重新初始化
-            ans = count > ans ? count : ans;
+        if (nums.length <= 1) {
+            return nums.length;
+        }
+        int ans = 1, tmp = 1;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i + 1] > nums[i]) {
+                tmp++;
+            } else {
+                tmp = 1;
+            }
+            ans = ans > tmp ? ans : tmp;
         }
         return ans;
     }

@@ -43,7 +43,6 @@ public class lengthOfLongestSubstring {
 
     /**
      * 滑动窗口
-     * j从左到右遍历，把遍历到的数字放到set中，如果set中已有，就让i从左到右遍历，把遍历到的数字从set中去除
      * 直到j要遍历的数字可以放入set中
      * 当j遍历结束后结束循环，j-i就是最大子串长度
      * 时间复杂度：O(2n)=O(n)，在最糟糕的情况下，每个字符将被 i 和 j 访问两次。
@@ -55,11 +54,13 @@ public class lengthOfLongestSubstring {
         Set<Character> set = new HashSet<>();
         int ans = 0, i = 0, j = 0;
         while (i < n && j < n) {
-            // try to extend the range [i, j]
+            //j从左到右遍历，把遍历到的数字放到set中
             if (!set.contains(s.charAt(j))){
                 set.add(s.charAt(j++));
+                //j-i为子串长度
                 ans = Math.max(ans, j - i);
             }
+            //如果set中已有，就让i从左到右遍历，把遍历到的数字从set中去除
             else {
                 set.remove(s.charAt(i++));
             }

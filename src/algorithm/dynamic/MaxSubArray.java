@@ -1,7 +1,7 @@
-package structure.array;
+package algorithm.dynamic;
 
 /**
- *
+ * 53. 最大子序和
  */
 public class MaxSubArray {
     public static void main(String[] args) {
@@ -17,15 +17,15 @@ public class MaxSubArray {
      * @return
      */
     public int maxSubArray(int[] nums) {
-        int ans=nums[0];
-        int sum=0;
+        int ans = nums[0];
+        int sum = 0;
         for (int num : nums) {
-            if(sum>0){
-                sum+=num;
-            }else{
-                sum=num;
+            if (sum > 0) {
+                sum += num;
+            } else {
+                sum = num;
             }
-            ans=Math.max(sum,ans);
+            ans = Math.max(sum, ans);
         }
         return ans;
     }

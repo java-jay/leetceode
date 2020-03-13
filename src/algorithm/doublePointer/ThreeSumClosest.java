@@ -1,4 +1,4 @@
-package structure.array;
+package algorithm.doublePointer;
 
 import java.util.Arrays;
 
@@ -18,15 +18,16 @@ public class ThreeSumClosest {
                 if (Math.abs(target - sum) < Math.abs(target - ans)) {
                     ans = sum;
                 }
-                if (sum > target) {
-                    right--;
-                } else if (sum < target) {
-                    left++;
-                } else {
+                if (sum == target) {
                     return ans;
+                } else if (sum > target) {
+                    right--;
+                } else {
+                    left++;
                 }
             }
         }
+        //循环结束后，ans就是最接近的值
         return ans;
     }
 }
