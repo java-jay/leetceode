@@ -12,14 +12,16 @@ public class FindTheDifference {
      * @return
      */
     public char findTheDifference(String s, String t) {
-        int[] arr = new int[26];
-        arr[t.charAt(t.length()-1) - 'a']--;
+        int[] alpha = new int[26];
+        alpha[t.charAt(t.length() - 1) - 'a']--;
         for (int i = 0; i < s.length(); i++) {
-            arr[s.charAt(i) - 'a']++;
-            arr[t.charAt(i) - 'a']--;
+            alpha[s.charAt(i) - 'a']++;
+            alpha[t.charAt(i) - 'a']--;
         }
-        for (int i = 0; i < 26; i++) {
-            if (arr[i] != 0) return (char) ('a' + i);
+        for (int i = 0; i < alpha.length; i++) {
+            if (alpha[i] != 0) {
+                return (char) (i + 'a');
+            }
         }
         return ' ';
     }
@@ -32,8 +34,8 @@ public class FindTheDifference {
      */
     public char findTheDifference2(String s, String t) {
         //获取t的最后一个字符，用这个字符与其他字符做异或运算，最后剩下的值就是多出来的值（结合律）
-        char ans = t.charAt(t.length()-1);
-        for(int i = 0; i < s.length(); i++) {
+        char ans = t.charAt(t.length() - 1);
+        for (int i = 0; i < s.length(); i++) {
             ans ^= s.charAt(i);
             ans ^= t.charAt(i);
         }

@@ -13,17 +13,20 @@ public class CheckPerfectNumber {
     //一个数的因子中位数是他的平方根，遍历2到平方根，把整除值和对应的成对值都加上
     //如果平方根是整数，最后再加上平方根
     public boolean checkPerfectNumber(int num) {
-        if (num == 1) return false;
+        if (num == 1) {
+            return false;
+        }
         int sum = 1;
-        int i = 2;
-        double sqrt = Math.sqrt(num);
-        for (; i < sqrt; i++) {
+        int i;
+        for (i=2; i < Math.sqrt(num); i++) {
             if (num % i == 0) {//如果能被整除，就加上这个值和他的成对值
                 sum += i;
                 sum += num / i;
             }
         }
-        if (i * i == num) sum += i;
+        if (i * i == num) {
+            sum += i;
+        }
         return sum == num;
     }
 

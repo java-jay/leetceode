@@ -20,8 +20,9 @@ public class numJewelsInStones {
         }
         int sum = 0;
         for (int i = 0; i < S.length(); i++) {
-
-            if (set.contains(S.charAt(i))) sum++;
+            if (set.contains(S.charAt(i))) {
+                sum++;
+            }
         }
         return sum;
     }

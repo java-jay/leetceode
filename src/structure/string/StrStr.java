@@ -6,7 +6,7 @@ package structure.string;
 public class StrStr {
     public static void main(String[] args) {
 //        System.out.println(new StrStr().strStr("mississippi", "issip"));
-        System.out.println(new StrStr().strStr2("mississippi", "issip"));
+        System.out.println(new StrStr().strStr2("hlllo", "ll"));
     }
 
     /**
@@ -19,13 +19,19 @@ public class StrStr {
     public int strStr(String haystack, String needle) {
         int l1 = haystack.length();
         int l2 = needle.length();
-        if (needle.isEmpty()) return 0;
+        if (needle.isEmpty()) {
+            return 0;
+        }
         for (int i = 0; i < l1 - l2 + 1; i++) {
             int j;
             for (j = 0; j < l2; j++) {
-                if (haystack.charAt(i + j) != needle.charAt(j)) break;
+                if (haystack.charAt(i + j) != needle.charAt(j)) {
+                    break;
+                }
             }
-            if (j == l2) return i;
+            if (j == l2) {
+                return i;
+            }
         }
         return -1;
     }
@@ -33,46 +39,46 @@ public class StrStr {
     /**
      * sunday解法
      */
-    public int strStr2(String origin, String aim) {
-        if (origin == null || aim == null) {
+    public int strStr2(String haystack, String needle) {
+        if (haystack == null || needle == null) {
             return 0;
         }
-        if (origin.length() < aim.length()) {
+        if (haystack.length() < needle.length()) {
             return -1;
         }
 
-        int originIndex = 0;
-        int aimIndex = 0;
-        // 成功匹配完终止条件：所有aim均成功匹配
-        while (aimIndex < aim.length()) {
-            // 针对origin匹配完，但aim未匹配完情况处理 如 mississippi sippia
-            if (originIndex > origin.length() - 1) {
+        int i = 0;
+        int j = 0;
+        // 成功匹配完终止条件：所有needle均成功匹配
+        while (j < needle.length()) {
+            // 针对haystack匹配完，但needle未匹配完情况处理 如 apple plea
+            if (i > haystack.length() - 1) {
                 return -1;
             }
-            if (origin.charAt(originIndex) == aim.charAt(aimIndex)) {
+            if (haystack.charAt(i) == needle.charAt(j)) {
                 // 匹配则index均加1
-                originIndex++;
-                aimIndex++;
+                i++;
+                j++;
             } else {
-                // 获取当前不匹配的下一个距离源index即(originIndex - aimIndex)长度为aim.length()的字符
-                int nextCharIndex = originIndex - aimIndex + aim.length();
-                if (nextCharIndex < origin.length()) {
-                    // 获取该字符在aim最后一次出现的索引
-                    int loc = aim.lastIndexOf(origin.charAt(nextCharIndex));
+                //如果子串的首字母不匹配，可以直接跳跃一个子串长度查找
+                int nextCharIndex = i - j + needle.length();
+                if (nextCharIndex < haystack.length()) {
+                    // 获取该字符在needle最后一次出现的索引
+                    int loc = needle.lastIndexOf(haystack.charAt(nextCharIndex));
                     if (loc == -1) {
-                        // 该字符不存在于aim中则设置originIndex为该字符的下一个字符
-                        originIndex = nextCharIndex + 1;
+                        // 该字符不存在于needle中则设置i为该字符的下一个字符
+                        i = nextCharIndex + 1;
                     } else {
-                        // 该字符存在于aim中则设置originIndex使其在aim中该字符处对齐
-                        originIndex = nextCharIndex - loc;
+                        // 该字符存在于needle中，i要倒退
+                        i = nextCharIndex - loc;
                     }
-                    aimIndex = 0;
+                    j = 0;
                 } else {
                     return -1;
                 }
             }
         }
-        return originIndex - aimIndex;
+        return i - j;
     }
 
     /**
