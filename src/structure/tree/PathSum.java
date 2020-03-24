@@ -18,7 +18,7 @@ public class PathSum {
         if (root == null) {
             return 0;
         }
-        //保存当前节点的值到数组中
+        //保存当前节点的值到数组中，也就是当前层的节点
         array[p] = root.val;
         int tmp = 0;
         //统计路径数
@@ -34,6 +34,7 @@ public class PathSum {
         //遍历下一层节点
         int left = pathSum(root.left, sum, array, p + 1);
         int right = pathSum(root.right, sum, array, p + 1);
+        //n为当前节点向上累加的结果，left和right为子节点向上累加的结果，所以要相加
         return n + left + right;
     }
 }

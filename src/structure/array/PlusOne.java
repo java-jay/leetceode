@@ -1,5 +1,7 @@
 package structure.array;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * 66.加一
  * 末位无进位，则末位加一即可，因为末位无进位，前面也不可能产生进位，比如45 => 46
@@ -7,10 +9,6 @@ package structure.array;
  * 末位有进位，并且一直进位到最前方导致结果多出一位，对于这种情况，需要在第2种情况遍历结束的基础上，进行单独处理，比如999 => 1000
  */
 public class PlusOne {
-    public static void main(String[] args) {
-        PlusOne plusOne = new PlusOne();
-        plusOne.plusOne(new int[]{9, 9, 9});
-    }
 
     public int[] plusOne(int[] digits) {
         int len = digits.length;

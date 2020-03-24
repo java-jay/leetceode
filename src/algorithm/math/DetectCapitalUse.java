@@ -14,9 +14,6 @@ public class DetectCapitalUse {
      * 遍历一遍字符串，分别记录大于‘a’和小于‘a’的数量
      * 若全大于a说明是全小写，反之全大写
      * 若只有一个小于a，载判断是否为第一个字符
-     *
-     * @param word
-     * @return
      */
     public boolean detectCapitalUse(String word) {
         int c1 = 0, c2 = 0;
@@ -27,9 +24,11 @@ public class DetectCapitalUse {
                 c2++;//大写
             }
         }
-        if (c1 == word.length() || c2 == word.length()) {//条件1和2
+        //条件1和2
+        if (c1 == word.length() || c2 == word.length()) {
             return true;
         }
-        return c2 == 1 && word.charAt(0) < 'a';//条件3
+        //条件3
+        return c2 == 1 && word.charAt(0) < 'a';
     }
 }

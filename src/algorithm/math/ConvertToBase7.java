@@ -11,11 +11,11 @@ public class ConvertToBase7 {
             ans += "-";
         }
         StringBuilder sb = new StringBuilder();
-        //输入是0时，也应该进入循环，所以用do while
+        //如果num是0，也应该进行一次字符串拼接，所以用do while
         do {
-            sb.append(String.valueOf(num%7));
-            num/=7;
+            sb.append(String.valueOf(num % 7));
+            num /= 7;
         } while (num > 0);
-        return ans+=sb.reverse().toString();
+        return ans + sb.reverse().toString();
     }
 }

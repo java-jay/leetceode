@@ -1,7 +1,7 @@
 package structure.trie;
 
 /**
- * 208. 实现 Trie (前缀树)，1个根节点指向多个单词，链接数组（指向下一个字母），结尾标记（最后一个节点为true）
+ * 1个根节点指向多个单词，链接数组（指向下一个字母），结尾标记（最后一个节点为true）
  */
 public class Trie {
     public static void main(String[] args) {
@@ -18,14 +18,16 @@ public class Trie {
 
     //添加一个单词到树中
     public void insert(String word) {
-        TrieNode node = root;//临时节点
+        //临时节点
+        TrieNode node = root;
         for (int i = 0; i < word.length(); i++) {
-            char currentChar = word.charAt(i);
+            char curLetter = word.charAt(i);
             //如果当前节点不存在该字母，将该字母存入树中
-            if (!node.containsKey(currentChar)) {
-                node.put(currentChar, new TrieNode());
+            if (!node.containsKey(curLetter)) {
+                node.put(curLetter, new TrieNode());
             }
-            node = node.get(currentChar);//指针到当前节点
+            //指针到当前节点
+            node = node.get(curLetter);
         }
         node.setEnd();//对最后一个节点设置结尾
     }
@@ -57,65 +59,60 @@ public class Trie {
         return node != null;
     }
 
-    //查找最长前缀
+    //查找最长前缀，为14题的LongestCommonPrefix服务
     public String searchLongestPrefix(String word) {
         TrieNode node = root;
         StringBuilder prefix = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
             char curLetter = word.charAt(i);
-            //如果节点不包含当前字母，且节点只有一个后继节点，且节点不是最后一个节点
+            //如果节点包含当前字母，且节点只有一个后继节点，且节点没有终点标记
+            //如果有2个后继节点，后面的就不是公共前缀了
+            //如果有终点标记，说明有一个字符串已经到底了，最长前缀已经找到
             if (node.containsKey(curLetter) && (node.getLinks() == 1) && (!node.isEnd())) {
                 //当前字母加入字符串缓冲区
                 prefix.append(curLetter);
                 //移动到下一节点
                 node = node.get(curLetter);
-            } else
+            } else {
                 return prefix.toString();
+            }
 
         }
         return prefix.toString();
     }
-}
 
-class TrieNode {
+    private class TrieNode {
+        //按顺序存储26个字母，a为第一个
+        private TrieNode[] links = new TrieNode[26];
+        //标记最后一个节点
+        private boolean isEnd;
+        // 非空子节点的数量
+        private int size;
 
-    // R links to node children
-    private TrieNode[] links;//按顺序存储26个字母，a为第一个
+        //存入的为小写字母，ch - 'a'：获取ch的索引
+        public boolean containsKey(char ch) {
+            return links[ch - 'a'] != null;
+        }
 
-    private final int R = 26;
+        public TrieNode get(char ch) {
+            return links[ch - 'a'];
+        }
 
-    private boolean isEnd;
+        public void put(char ch, TrieNode node) {
+            links[ch - 'a'] = node;
+            size++;
+        }
 
-    // 非空子节点的数量
-    private int size;
+        void setEnd() {
+            isEnd = true;
+        }
 
-    public TrieNode() {
-        links = new TrieNode[R];
-    }
+        boolean isEnd() {
+            return isEnd;
+        }
 
-    //存入的为小写字母，ch - 'a'：获取ch的索引
-    public boolean containsKey(char ch) {
-        return links[ch - 'a'] != null;
-    }
-
-    public TrieNode get(char ch) {
-        return links[ch - 'a'];
-    }
-
-    public void put(char ch, TrieNode node) {
-        links[ch - 'a'] = node;
-        size++;
-    }
-
-    public void setEnd() {
-        isEnd = true;
-    }
-
-    public boolean isEnd() {
-        return isEnd;
-    }
-
-    public int getLinks() {
-        return size;
+        int getLinks() {
+            return size;
+        }
     }
 }

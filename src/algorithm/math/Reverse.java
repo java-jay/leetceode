@@ -7,16 +7,20 @@ package algorithm.math;
  */
 public class Reverse {
     public int reverse(int x) {
-        int rev = 0;
+        int ans = 0;
         while (x != 0) {
-            int pop = x % 10;
+            int temp = x % 10;
             x /= 10;
             // (2^(31)-1)/10= 2147483647/10，个位为7，2147483640+7=Integer.MAX_VALUE
-            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
+            if (ans > Integer.MAX_VALUE / 10 || (ans == Integer.MAX_VALUE / 10 && temp > 7)) {
+                return 0;
+            }
             // (-2^(31))/10= -2147483648/10，-2147483640-8=Integer.MIN_VALUE
-            if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
-            rev = rev * 10 + pop;
+            if (ans < Integer.MIN_VALUE / 10 || (ans == Integer.MIN_VALUE / 10 && temp < -8)) {
+                return 0;
+            }
+            ans = ans * 10 + temp;
         }
-        return rev;
+        return ans;
     }
 }

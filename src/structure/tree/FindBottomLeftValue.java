@@ -22,21 +22,26 @@ public class FindBottomLeftValue {
         while (!queue.isEmpty()) {
             //替换root，这样最后就可以直接返回root，而不用重新设计一个变量
             root = queue.poll();
-            if (root.right != null) queue.add(root.right);
+            if (root.right != null) {
+                queue.add(root.right);
+            }
             //通过队列，最后一次添加的left节点也是最后一次被删除的
-            if (root.left != null) queue.add(root.left);
+            if (root.left != null) {
+                queue.add(root.left);
+            }
         }
         return root.val;
     }
 
-
-    private int ans = -1;
-    //记录当前最大高度
-    private int max = -1;
-
     /**
      * DFS
      */
+    //结果值
+    private int ans = -1;
+
+    //记录当前最大高度
+    private int max = -1;
+
     public int findBottomLeftValue2(TreeNode root) {
         dfs(root, 0);
         return ans;

@@ -16,16 +16,28 @@ public class SortedArrayToBST {
         return toBST(nums, 0, nums.length - 1);
     }
 
-    /**
-     * 二分法
-     * @param nums
-     * @param left
-     * @param right
-     * @return
-     */
+    //始终选择中间位置的左边元素作为根节点
     private TreeNode toBST(int[] nums, int left, int right) {
-        if (left > right) return null;
-        int middle = left + (right - left) >> 1;
+        if (left > right) {
+            return null;
+        }
+        int middle = (left + right) >>> 1;
+        TreeNode node = new TreeNode(nums[middle]);
+        node.left = toBST(nums, left, middle - 1);
+        node.right = toBST(nums, middle + 1, right);
+        return node;
+    }
+
+    //始终选择中间位置的右边元素作为根节点
+    private TreeNode toBST2(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+        int middle = (left + right) >>> 1;
+        //移动到中间位置的右边
+        if ((left + right) % 2 == 1) {
+            middle++;
+        }
         TreeNode node = new TreeNode(nums[middle]);
         node.left = toBST(nums, left, middle - 1);
         node.right = toBST(nums, middle + 1, right);

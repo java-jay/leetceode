@@ -10,9 +10,24 @@ import java.util.List;
  * @Date 2020/1/8
  */
 public class FindMode {
-    private List<Integer> list = new ArrayList<>();//存放作为众数的元素
-    private int curCount = 1;//记录当前数字出现次数
-    private int maxCount = 1;//记录众数的出现次数
+    public static void main(String[] args) {
+        TreeNode treeNode=new TreeNode(1);
+        treeNode.left=new TreeNode(1);
+        treeNode.right=new TreeNode(2);
+        treeNode.right.right=new TreeNode(2);
+        new FindMode().findMode(treeNode);
+    }
+
+    //存放作为众数的元素
+    private List<Integer> list = new ArrayList<>();
+
+    //记录当前数字出现次数
+    private int curCount = 1;
+
+    //记录众数的出现次数
+    private int maxCount = 1;
+
+    //中序遍历到的上一个节点
     private TreeNode preOrder = null;
 
     public int[] findMode(TreeNode root) {
@@ -25,16 +40,13 @@ public class FindMode {
         return result;
     }
 
-    /**
-     * 中序遍历
-     *
-     * @param node
-     */
+    //中序遍历
     private void inOrder(TreeNode node) {
         if (node == null) {
             return;
         }
         inOrder(node.left);
+        //如果这个节点与遍历到的上一个节点相等
         if (preOrder != null) {
             if (node.val == preOrder.val) {
                 curCount++;
@@ -42,12 +54,16 @@ public class FindMode {
                 curCount = 1;
             }
         }
-        if (curCount > maxCount) {//如果之前记录的不为众数
+        //如果众数更新
+        if (curCount > maxCount) {
             maxCount = curCount;
-            list.clear();//集合清零
-            list.add(node.val);//加入当前节点
+            //集合清零
+            list.clear();
+            //加入当前节点
+            list.add(node.val);
         } else if (curCount == maxCount) {
-            list.add(node.val);//加入当前节点
+            //如果为众数，加入当前节点
+            list.add(node.val);
         }
         preOrder = node;
         inOrder(node.right);

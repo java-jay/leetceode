@@ -6,7 +6,7 @@ package structure.tree;
  * @Auther java_jay
  * @Date 2020/1/7
  */
-public class ConvertBST {
+public class    ConvertBST {
     private int sum = 0;
 
     public TreeNode convertBST(TreeNode root) {
@@ -22,7 +22,9 @@ public class ConvertBST {
      * @param root
      */
     private void traver(TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
         traver(root.right);
         sum += root.val;
         root.val = sum;

@@ -10,7 +10,7 @@ package structure.tree;
 public class DiameterOfBinaryTree {
     public static void main(String[] args) {
         TreeNode t1 = new TreeNode(1);
-        t1.left = new TreeNode(1);
+//        t1.left = new TreeNode(1);
         System.out.println(new DiameterOfBinaryTree().diameterOfBinaryTree(t1));
     }
 
@@ -25,9 +25,9 @@ public class DiameterOfBinaryTree {
         if (node == null) {
             return 0;
         }
-        int L = depth(node.left);
-        int R = depth(node.right);
-        count = Math.max(count, L + R);
-        return Math.max(L, R) + 1;
+        int left = depth(node.left);
+        int right = depth(node.right);
+        count = Math.max(count, left + right);
+        return Math.max(left, right) + 1;
     }
 }

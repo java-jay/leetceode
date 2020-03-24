@@ -1,6 +1,7 @@
 package algorithm.math;
 
 /**
+ * 628. 三个数的最大乘积
  * @Auther java_jay
  * @Date 2019/12/28
  */
@@ -18,20 +19,24 @@ public class MaximumProduct {
         int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
         for (int n : nums) {
             //n是最小的值
-            if (n <= min1) {
+            if (n < min1) {
                 min2 = min1;
                 min1 = n;
-            } else if (n <= min2) {//n是第二小的值
+            //n是第二小的值
+            } else if (n < min2) {
                 min2 = n;
             }
-            if (n >= max1) {//n是最大值
+            //n是最大值
+            if (n > max1) {
                 max3 = max2;
                 max2 = max1;
                 max1 = n;
-            } else if (n >= max2) {//n是第二大的值
+            //n是第二大的值
+            } else if (n > max2) {
                 max3 = max2;
                 max2 = n;
-            } else if (n >= max3) {//n是第三大的值
+            //n是第三大的值
+            } else if (n > max3) {
                 max3 = n;
             }
         }

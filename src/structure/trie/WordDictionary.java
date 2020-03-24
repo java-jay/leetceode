@@ -1,73 +1,81 @@
 package structure.trie;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-/**
- * 211. 添加与搜索单词 - 数据结构设计，支持正则表达式
- * addWord("bad")
- * addWord("dad")
- * addWord("mad")
- * search("pad") -> false
- * search("bad") -> true
- * search(".ad") -> true
- * search("b..") -> true
- * <p>
- * 哈希表实现
- * 执行用时 : 51 ms, 击败了98.29% 的用户 内存消耗 : 54.5 MB, 击败了95.16% 的用户
- */
 public class WordDictionary {
-
-    Map<Integer, Set<String>> map;
+    private TrieNode root;
 
     public WordDictionary() {
-        map = new HashMap<>();
+        root = new TrieNode();
     }
-
-    //添加单词
+    //和上一题的插入方法一样
     public void addWord(String word) {
-        int length = word.length();
-        if (map.get(length) != null) {
-            //如果map中已经有该单词长度的单词，就让set再加一个单词
-            map.get(length).add(word);
-        } else {
-            //如果该长度是新出现的，就创建一个新set集合接收
-            Set<String> set = new HashSet<>();
-            set.add(word);
-            map.put(length, set);
+        TrieNode node = root;
+        for (int i = 0; i < word.length(); i++) {
+            char curLetter = word.charAt(i);
+            if (!node.containsKey(curLetter)) {
+                node.put(curLetter, new TrieNode());
+            }
+            node = node.get(curLetter);
         }
+        node.setEnd();
     }
 
-    //查找单词
+
     public boolean search(String word) {
-        //找到该单词长度的set集合
-        Set<String> set = map.get(word.length());
-        //不存在该长度的字符串，直接返回false；
-        if (set == null) {
+        return dfs(root, word, 0);
+    }
+
+    //深度查找
+    boolean dfs(TrieNode root, String word, int index) {
+        //如果索引大于等于待查找单词最大长度，则返回当前节点是否为最后一个节点,这边就是递归的终点
+        if (index >= word.length()) {
+            return root.isEnd;
+        }
+        //当前字符
+        char curLetter = word.charAt(index);
+        //如果当前字符不是.
+        if (curLetter != '.') {
+            //如果当前节点的数组包含当前字符
+            if (root.containsKey(curLetter)) {
+                //遍历到单词的下一个字符
+                return dfs(root.get(curLetter), word, index + 1);
+            }
+            //如果当前节点的数组不包含当前字符
             return false;
         }
-        //如果set存在该单词，直接返回true
-        if (set.contains(word)) {
-            return true;
-        }
-        //如果不存在，则判断正则表达式
-        //带标签的continue，可以指示continue跳出的是哪一个循环
-        P:
-        //遍历set集合
-        for (String s : set) {
-            //逐个字符对比
-            for (int i = 0; i < s.length(); i++) {
-                //如果单词中不包含.且两个单词当前字符不匹配
-                if (word.charAt(i) != s.charAt(i) && word.charAt(i) != '.') {
-                    //跳出到set的下一单词
-                    continue P;
-                }
+        //如果当前字符是.，就遍历节点数组，如果数组中还有值，就代表.能匹配值
+        for (TrieNode link : root.links) {
+            //如果当前节点不为空，且单词的下一字符返回true
+            if (null != link && dfs(link, word, index + 1)) {
+                return true;
             }
-            //循环结束，说明set的当前单词就是要找的单词
-            return true;
         }
         return false;
+    }
+
+    private class TrieNode {
+
+        TrieNode[] links = new TrieNode[26];
+
+        boolean isEnd;
+
+        boolean containsKey(char ch) {
+            return links[ch - 'a'] != null;
+        }
+
+        TrieNode get(char ch) {
+            return links[ch - 'a'];
+        }
+
+        void put(char ch, TrieNode node) {
+            links[ch - 'a'] = node;
+        }
+
+        void setEnd() {
+            isEnd = true;
+        }
+
+        boolean isEnd() {
+            return isEnd;
+        }
     }
 }

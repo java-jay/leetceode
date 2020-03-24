@@ -1,4 +1,4 @@
-import structure.trie.Trie;
+package structure.trie;
 
 /**
  * 14. 最长公共前缀
@@ -16,11 +16,11 @@ import structure.trie.Trie;
  */
 public class LongestCommonPrefix {
     public static void main(String[] args) {
-        String[] strs = new String[]{"leetcode", "lee", "leet", "le"};
+        String[] strs = new String[]{"leetcode","le","lee"};
 //        String s = longestCommonPrefix4(strs);
 //        System.out.println(s);
-        LongestCommonPrefix longestCommonPrefix=new LongestCommonPrefix();
-        String s = longestCommonPrefix.longestCommonPrefix5(strs[0], strs);
+        LongestCommonPrefix longestCommonPrefix = new LongestCommonPrefix();
+        String s = longestCommonPrefix.longestCommonPrefix2(strs);
         System.out.println(s);
     }
 
@@ -40,13 +40,20 @@ public class LongestCommonPrefix {
      * @return
      */
     public String longestCommonPrefix(String[] strs) {
-        if (strs.length == 0) return "";
+        if (strs.length == 0) {
+            return "";
+        }
         String prefix = strs[0];
-        for (int i = 1; i < strs.length; i++)
+        for (int i = 1; i < strs.length; i++) {
+            //如果假定前缀串不是后面的字符串的前缀
             while (strs[i].indexOf(prefix) != 0) {
+                //前缀串每次末尾剔除1
                 prefix = prefix.substring(0, prefix.length() - 1);
-                if (prefix.isEmpty()) return "";
+                if (prefix.isEmpty()) {
+                    return "";
+                }
             }
+        }
         return prefix;
     }
 
@@ -64,18 +71,22 @@ public class LongestCommonPrefix {
      * @param strs
      * @return
      */
-    public static String longestCommonPrefix2(String[] strs) {
-        if (strs == null || strs.length == 0) return "";
+    public String longestCommonPrefix2(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
         for (int i = 0; i < strs[0].length(); i++) {
             //从数组的第二个值开始
             for (int j = 1; j < strs.length; j++) {
                 //如果该字符的索引=另一个字符串的长度，或者两个字符串的当前索引不同
-                if (i == strs[j].length() || strs[j].charAt(i) != strs[0].charAt(i))
+                //说明后者是前者的前缀
+                if (i == strs[j].length() || strs[j].charAt(i) != strs[0].charAt(i)) {
                     //返回第一个值的当前长度的字符串
                     return strs[0].substring(0, i);
+                }
             }
         }
-        //返回第一个值
+        //说明所有的字符串都一样
         return strs[0];
     }
 
@@ -165,9 +176,9 @@ public class LongestCommonPrefix {
     /**
      * 前缀树
      * trie树的第一个分叉口之前的单分支树的就是所求
-     * 从第二个值开始加入树，对第一个值进行遍历，判断树中当前节点是否包含该字母，
+     * 从数组的第二个值开始加入树，对第一个值进行遍历，判断树中当前节点是否包含该字母，
      * 且只有一个后继节点（表明没有分支，有共同前缀）
-     *
+     * <p>
      * 时间复杂度：预处理过程 O(S)，其中 S 数组里所有字符串中字符数量的总和，
      * 最长公共前缀查询操作的复杂度为 O(m)。
      * <p>
@@ -175,19 +186,21 @@ public class LongestCommonPrefix {
      * <p>
      * 空间复杂度：O(S)，我们只需要使用额外的 S 空间建立字典树。
      *
-     * @param q
      * @param strs
      * @return
      */
-    public String longestCommonPrefix5(String q, String[] strs) {
-        if (strs == null || strs.length == 0)
+    public String longestCommonPrefix5(String[] strs) {
+        if (strs == null || strs.length == 0) {
             return "";
-        if (strs.length == 1)
+        }
+        if (strs.length == 1) {
             return strs[0];
+        }
         Trie trie = new Trie();
+        //从数组的第二个值开始加入树
         for (int i = 1; i < strs.length; i++) {
             trie.insert(strs[i]);
         }
-        return trie.searchLongestPrefix(q);
+        return trie.searchLongestPrefix(strs[0]);
     }
 }
